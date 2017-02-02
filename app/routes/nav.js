@@ -5,8 +5,10 @@ var navRouter   = express.Router();
 
 //------------------------------------------------------------------------
 // Navigation Routes
-navRouter.get('/',      (req, res) => res.status(200).end('BN-Auth is online'));
-navRouter.get('/ping',  (req, res) => res.status(200).end('BN-Auth is online'));
+navRouter.use((req, res, next) => {
+    console.log('HIHI');
+    res.sendFile(Utils.root_path + '/public/build/index.html');
+});
 
 //------------------------------------------------------------------------
 // Exports

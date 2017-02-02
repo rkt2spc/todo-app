@@ -4,7 +4,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     // SPA HTML5 Mode
-    // $locationProvider.html5Mode({ enabled: true }).hashPrefix('!');
+    $locationProvider.html5Mode({ enabled: true }).hashPrefix('!');
     $urlRouterProvider.otherwise('/');
 
     // UI-Router
@@ -15,6 +15,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         name: 'dashboard',
         url: '/',
         component: 'dashboard'
+      },
+      {
+        name: 'test',
+        url: '/test',
+        template: '<h1>test</h1>'
       }
     ];
 
@@ -25,18 +30,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   }
 ]);
 
-app.run(['$rootScope', '$transitions',
-  function ($rootScope, $transitions) {
+app.run(['$rootScope',
+  function ($rootScope) {
 
-    // Default Substate Redirection
-    $transitions.onBefore({ to: (state) => state.defaultSubstate }, (trans) => {
-      return trans.router.stateService.target(trans.to().defaultSubstate);
-    });
+    // // Default Substate Redirection
+    // $transitions.onBefore({ to: (state) => state.defaultSubstate }, (trans) => {
+    //   return trans.router.stateService.target(trans.to().defaultSubstate);
+    // });
 
-    // Loading Screen Trigger
-    $transitions.onStart({}, () => { $rootScope.loading = true; });
-    $transitions.onFinish({}, () => {
-      $rootScope.loading = false;
-      $("html, body").animate({ scrollTop: 0 }, 200);
-    });
+    // // Loading Screen Trigger
+    // $transitions.onStart({}, () => { $rootScope.loading = true; });
+    // $transitions.onFinish({}, () => {
+    //   $rootScope.loading = false;
+    //   $("html, body").animate({ scrollTop: 0 }, 200);
+    // });
   }]);

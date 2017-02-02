@@ -16,8 +16,8 @@ var apiRouter = Utils.getRouter('api');
 //------------------------------------------------------------------------
 // Mount to Application Router
 var appRouter = express.Router();
-appRouter.use('/', navRouter);
 appRouter.use('/api', apiRouter);
+appRouter.use('/', navRouter);
 
 //------------------------------------------------------------------------
 // Config Object
